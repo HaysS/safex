@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import firebase from 'firebase';
+import Home from './screens/Home';
 
 //Automatically set to 'production' when published through Expo
 var env = process.env.NODE_ENV || 'development';
@@ -19,8 +20,7 @@ export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={{fontSize: 50,}}>Safex</Text>
-        <Text style={{fontSize: 20, textAlign: 'center'}}>Verify Sexual Consent Before Anything Happens.</Text>
+        <Home />
       </View>
     );
   }
@@ -29,8 +29,5 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#b9afff',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
 });
