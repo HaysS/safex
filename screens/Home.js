@@ -10,6 +10,8 @@ import {
   TextInput,
 } from 'react-native';
 
+import * as FirebaseAPI from '../api/firebaseAPI'
+
 const {height, width} = Dimensions.get('window');
 
 export default class Home extends React.Component {
@@ -22,12 +24,16 @@ export default class Home extends React.Component {
     }
   }
 
+  submitLoginInfo() {
+    FirebaseAPI.createAccount(this.state.email, this.state.password)
+  }
+
   render() {
     return (
       <View style={styles.container}>
         <Text style={{fontSize: 50,}}>Safex</Text>
         <Text style={{fontSize: 20, textAlign: 'center'}}>Verify Sexual Consent Before Anything Happens.</Text>
-        <View style={{flex: 1}}>
+        <View style={{height: 80}}>
           <TextInput
             style={styles.textInput}
             placeholder="Email"
@@ -38,8 +44,12 @@ export default class Home extends React.Component {
           <TextInput
             style={styles.textInput}
             placeholder="Password"
+            returnKeyType="done"
             blurOnSubmit={true}
             onChangeText={(text) => this.setState({password: text})}
+            onSubmitEditing={() => {
+              this.submitLoginInfo()
+            }}
             value={this.state.password}
           />
         </View>
