@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import firebase from 'firebase';
 
 //Automatically set to 'production' when published through Expo
 var env = process.env.NODE_ENV || 'development';
