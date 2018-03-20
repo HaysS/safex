@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 
 import * as FirebaseAPI from '../api/firebaseAPI'
+import firebase from 'firebase'
 
 const {height, width} = Dimensions.get('window');
 
@@ -27,7 +28,7 @@ export default class Home extends React.Component {
   submitLoginInfo() {
     FirebaseAPI.createAccount(this.state.email, this.state.password)
   }
-
+  
   render() {
     return (
       <View style={styles.container}>
