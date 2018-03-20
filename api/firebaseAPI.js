@@ -8,6 +8,10 @@ export const createAccount = (email, password) => {
 
 	  console.log('errorCode: ', errorCode, 'errorMessage: ', errorMessage)
 	});
+
+	const user = firebase.auth().currentUser
+
+	console.log('Created new user account with following data: ', user)
 }
 
  export const getCurrentUser = (func) => {
