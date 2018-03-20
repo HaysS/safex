@@ -1,7 +1,9 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+
 import firebase from 'firebase';
-import Home from './screens/Home';
+
+import RootNavigation from './navigation/RootNavigation';
 
 //Automatically set to 'production' when published through Expo
 var env = process.env.NODE_ENV || 'development';
@@ -20,7 +22,7 @@ export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Home />
+        <RootNavigation />
       </View>
     );
   }

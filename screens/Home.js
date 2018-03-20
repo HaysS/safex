@@ -18,6 +18,12 @@ import Login from './Login'
 const {height, width} = Dimensions.get('window');
 
 export default class Home extends React.Component {
+  static navigationOptions = {
+    title: 'Safex',
+    headerLeft: null,
+    gesturesEnabled: false,
+  };
+  
   constructor(props) {
     super(props);
 
