@@ -34,18 +34,31 @@ export default class Home extends React.Component {
   }
 
   componentWillMount() {
+    firebase.auth().signOut() 
+
     if(this.state.user == null)
       this.watchForUserSignIn()
   }
 
+  componentWillUnmount() {
+    // firebase.auth().signOut()
+  }
+
   watchForUserSignIn() {
     this.setState({unsubscribe: firebase.auth().onAuthStateChanged((user) => {
-        this.setState({user})
+        if(user != null) {
+          this.setState({user})
 
-        console.log('watchForUserSignIn: ', user)
+          FirebaseAPI.getUserCb(user.uid, (user) => {
+            if(user == null)
+              FirebaseAPI.updateUser(user)
+          })
 
-        //Unsubscribe to kill listener once called
-        this.state.unsubscribe()
+          // console.log('watchForUserSignIn: ', FirebaseAPI.getUser(user.uid))
+
+          //Unsubscribe to kill listener once called
+          this.state.unsubscribe()
+        }
       })
     })
   }

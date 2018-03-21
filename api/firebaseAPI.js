@@ -11,10 +11,27 @@ export const createAccount = (email, password) => {
 
 	const user = firebase.auth().currentUser
 
-	console.log('Created new user account with following data: ', user)
+	//Store user data in firebase database
+	//storeNewUser(user)
+
+	// console.log('Created new user account with following data: ', user.uid)
 }
 
- export const getCurrentUser = (func) => {
+export const updateUser = (user) => {
+	const firebaseRefAtUID = firebase.database().ref().child('users')
+		.update([user.uid]:user)
+}
+
+export const getUserCb = (uid) => {
+	return firebase.database().ref().child('users').child(uid).once('value')
+    	.then((snap) => {
+    		const user = snap.val()
+
+    		console.log(user)
+    	})
+}
+
+export const getCurrentUser = (func) => {
     const user = firebase.auth().currentUser
 
     if(user) {
@@ -22,4 +39,4 @@ export const createAccount = (email, password) => {
     } else {
     	func(null)
     }
-  }
+}
