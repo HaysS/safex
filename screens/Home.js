@@ -23,7 +23,7 @@ export default class Home extends React.Component {
     headerLeft: null,
     gesturesEnabled: false,
   };
-  
+
   constructor(props) {
     super(props);
 
@@ -41,7 +41,7 @@ export default class Home extends React.Component {
     this.setState({unsubscribe: firebase.auth().onAuthStateChanged((user) => {
         this.setState({user})
 
-        console.log(user)
+        console.log('watchForUserSignIn: ', user)
 
         //Unsubscribe to kill listener once called
         this.state.unsubscribe()
@@ -49,10 +49,19 @@ export default class Home extends React.Component {
     })
   }
 
+  showLogin() {
+    console.log('showLogin: ', this.state.user)
+
+    if(this.state.user == null)
+      return <Login />
+    else
+      return <TextInput />
+  }
+
   render() {
     return (
       <View style={styles.container}>
-        <Login />
+        {this.showLogin()}
       </View>
     );
   }
