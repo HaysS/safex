@@ -34,7 +34,8 @@ export default class Home extends React.Component {
   }
 
   componentWillMount() {
-    this.watchForUserSignIn()
+    if(this.state.user == null)
+      this.watchForUserSignIn()
   }
 
   watchForUserSignIn() {
@@ -50,12 +51,8 @@ export default class Home extends React.Component {
   }
 
   showLogin() {
-    console.log('showLogin: ', this.state.user)
-
     if(this.state.user == null)
       return <Login />
-    else
-      return <TextInput />
   }
 
   render() {
