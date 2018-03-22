@@ -34,20 +34,24 @@ export default class Home extends React.Component {
   }
 
   componentWillMount() {
-    firebase.auth().signOut() 
+    // firebase.auth().signOut() 
 
     if(this.state.user == null)
       this.watchForUserSignIn()
   }
 
-  componentWillUnmount() {
-    // firebase.auth().signOut()
+  signout() {
+    firebase.auth().signOut()
+
+    this.setState({user: null})
+
+    this.watchForUserSignIn()
   }
 
   signoutButton() {
     return (
       <View style={{width: width, height:height/8,}}>
-        <TouchableOpacity style={{flex: 1}} onPress={() => {}}>
+        <TouchableOpacity style={{flex: 1}} onPress={() => { this.signout() }}>
           <View style={styles.bottomOptionContainer}>
             <Text style={styles.logout}>Sign out</Text>
           </View>
@@ -78,13 +82,14 @@ export default class Home extends React.Component {
   showLogin() {
     if(this.state.user == null)
       return <Login />
+    else
+      return this.signoutButton()
   }
 
   render() {
     return (
       <View style={styles.container}>
         {this.showLogin()}
-        {this.signoutButton()}
       </View>
     );
   }
