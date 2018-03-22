@@ -49,9 +49,9 @@ export default class Home extends React.Component {
         if(user != null) {
           this.setState({user})
 
-          FirebaseAPI.getUserCb(user.uid, (user) => {
-            if(user == null)
-              FirebaseAPI.updateUser(user)
+          FirebaseAPI.getUserCb(user.uid, (oldUser) => {
+            if(oldUser == null)
+              FirebaseAPI.createUser(user)
           })
 
           // console.log('watchForUserSignIn: ', FirebaseAPI.getUser(user.uid))

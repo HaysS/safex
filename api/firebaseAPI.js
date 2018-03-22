@@ -17,17 +17,32 @@ export const createAccount = (email, password) => {
 	// console.log('Created new user account with following data: ', user.uid)
 }
 
-export const updateUser = (user) => {
-	const firebaseRefAtUID = firebase.database().ref().child('users')
-		.update([user.uid]:user)
+export const createUser = (user) => {
+	console.log('creating User: ', user)
+	console.log('THIS IS THEIR EMAIL: ', user.email)
+
+	const firebaseRefAtUID = firebase.database().ref().child('users').child(user.uid)
+
+	return firebaseRefAtUID.once("value").then((snap) => {
+		const defaults = {
+		    uid: user.uid,
+		    email: user.email,
+		}
+		const current = snap.val()
+		const mergedUser = {...defaults, ...current}
+
+		firebaseRefAtUID.update(mergedUser)
+	})  
 }
 
-export const getUserCb = (uid) => {
+export const getUserCb = (uid, func) => {
 	return firebase.database().ref().child('users').child(uid).once('value')
     	.then((snap) => {
     		const user = snap.val()
 
     		console.log(user)
+
+    		func(user)
     	})
 }
 
