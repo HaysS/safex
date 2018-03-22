@@ -18,8 +18,7 @@ export const createAccount = (email, password) => {
 }
 
 export const createUser = (user) => {
-	console.log('creating User: ', user)
-	console.log('THIS IS THEIR EMAIL: ', user.email)
+	// console.log('creating User with uid: ', user.uid, 'and email: ', user.email)
 
 	const firebaseRefAtUID = firebase.database().ref().child('users').child(user.uid)
 

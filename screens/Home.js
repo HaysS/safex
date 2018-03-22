@@ -44,6 +44,18 @@ export default class Home extends React.Component {
     // firebase.auth().signOut()
   }
 
+  signoutButton() {
+    return (
+      <View style={{width: width, height:height/8,}}>
+        <TouchableOpacity style={{flex: 1}} onPress={() => {}}>
+          <View style={styles.bottomOptionContainer}>
+            <Text style={styles.logout}>Sign out</Text>
+          </View>
+        </TouchableOpacity>
+      </View>
+    )
+  }
+
   watchForUserSignIn() {
     this.setState({unsubscribe: firebase.auth().onAuthStateChanged((user) => {
         if(user != null) {
@@ -72,6 +84,7 @@ export default class Home extends React.Component {
     return (
       <View style={styles.container}>
         {this.showLogin()}
+        {this.signoutButton()}
       </View>
     );
   }
@@ -93,5 +106,19 @@ const styles = StyleSheet.create({
     color: '#565656',
     textAlign: 'left',
     backgroundColor: 'white',
+  },
+  bottomOptionContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderTopWidth: 1,
+    borderColor: 'lightgrey',
+    backgroundColor: 'white',
+  },
+  logout: {
+    fontSize: 24, 
+    color: '#2B2B2B',
+    alignSelf: 'center',
+    textAlign: 'center',
   },
 });
